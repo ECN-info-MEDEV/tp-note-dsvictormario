@@ -7,11 +7,7 @@
  *
  * @author murkp
  */
-import java.util.Scanner;
-import org.centrale.ds_medev_mario_victor.Bateau;
-import org.centrale.ds_medev_mario_victor.PorteAvions;
-import org.centrale.ds_medev_mario_victor.Cuirasse;
-import org.centrale.ds_medev_mario_victor.Destroyer;
+package org.centrale.ds_medev_mario_victor;
 
 import java.util.Scanner;
 
@@ -38,7 +34,7 @@ public class Joueur {
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
 
-                positionValide = grille.positionnerNavire(navire, x, y);
+                positionValide = grille.positionnerNavire(navire, x, y, true);
 
                 if (!positionValide) {
                     System.out.println("Position invalide, essayez à nouveau.");
@@ -103,7 +99,6 @@ public class Joueur {
 
     public String getNom() {
         return nom;
-        System.out.println("aaa");
     }
 }
 
