@@ -103,6 +103,7 @@ public class Joueur {
 
     public String getNom() {
         return nom;
+        System.out.println("aaa");
     }
 }
 
