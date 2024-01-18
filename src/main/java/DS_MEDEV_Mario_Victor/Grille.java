@@ -7,7 +7,7 @@ package DS_MEDEV_Mario_Victor;
 /**
  *
  * @author ESPINOZA Mario
- * @author MIRELLES Victor
+ * @author MEIRELLES Victor
  */
 public class Grille {
     /*
