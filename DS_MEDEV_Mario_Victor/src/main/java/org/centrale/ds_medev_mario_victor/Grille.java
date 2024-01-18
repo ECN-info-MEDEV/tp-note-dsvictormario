@@ -6,7 +6,8 @@ package org.centrale.ds_medev_mario_victor;
 
 /**
  *
- * @author murkp
+ * @author Espinoza Mario
+ * @author MEIRELLES Victor
  */
 
 public class Grille {
@@ -279,8 +280,4 @@ public class Grille {
     }
 
 }
-
-
-    
-
 

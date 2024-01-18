@@ -6,7 +6,8 @@ package org.centrale.ds_medev_mario_victor;
  */
 
 /**
- * @author murkp
+ * @author Espinoza Mario
+ * @author MEIRELLES Victor
  */
 
 
@@ -32,9 +33,9 @@ public class Joueur {
                 System.out.println("Entrez les coordonnées pour placer votre " + navire.getNom() + " (format: x y): ");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
-
+              
                 positionValide = grille.positionnerNavire(this, navire, x, y);
-
+              
                 if (!positionValide) {
                     System.out.println("Position invalide, essayez à nouveau.");
                 }
