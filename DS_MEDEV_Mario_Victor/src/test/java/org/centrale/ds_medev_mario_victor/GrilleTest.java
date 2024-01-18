@@ -30,46 +30,33 @@ public class GrilleTest {
      * Test of affiche method, of class Grille.
      */
     @Test
-    public void testAffiche() {
-        System.out.println("affiche");
-        Grille instance = null;
-        instance.affiche();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testAfficherGrilleComplete() {
+        char[][] tab = {
+            {'a', 'b', 'c'},
+            {'d', 'e', 'f'},
+            {'g', 'h', 'i'}
+        };
+
+        Grille  grille = new Grille(3,3);  
+        String expectedOutput = "a b c \nd e f \ng h i \n";
+        String actualOutput = grille.afficherGrilleComplete(tab);
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+    public void testAfficherGrilleAdversaire() {
+        char[][] grilleAdversaire = {
+            {' ', 'X', 'O'},
+            {'O', ' ', 'X'},
+            {' ', 'O', ' '}
+        };
+
+        Grille tab = new Grille(3,3);  // Reemplaza "TuClase" con el nombre real de tu clase
+        String expectedOutput = "~ T M \nM ~ T \n~ M ~ \n";
+        String actualOutput = tab.afficherGrilleAdversaire(grilleAdversaire);
+
+        assertEquals(expectedOutput, actualOutput);
     }
 
-    /**
-     * Test of positionnerNavire method, of class Grille.
-     */
-    @Test
-    public void testPositionnerNavire() {
-        System.out.println("positionnerNavire");
-        Bateau navire = null;
-        int x = 0;
-        int y = 0;
-        boolean horizontal = false;
-        Grille instance = null;
-        boolean expResult = false;
-        boolean result = instance.positionnerNavire(navire, x, y, horizontal);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of recevoirAttaque method, of class Grille.
-     */
-    @Test
-    public void testRecevoirAttaque() {
-        System.out.println("recevoirAttaque");
-        int x = 0;
-        int y = 0;
-        Grille instance = null;
-        boolean expResult = false;
-        boolean result = instance.recevoirAttaque(x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
     
 }
