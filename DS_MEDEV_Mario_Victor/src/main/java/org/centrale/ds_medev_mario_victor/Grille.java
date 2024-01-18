@@ -8,7 +8,7 @@ package org.centrale.ds_medev_mario_victor;
  *
  * @author murkp
  */
-public class Grille {
+public class Grille{
     private int largeur;
     private int hauteur;
     private char[][] grille;
@@ -101,11 +101,7 @@ public class Grille {
         return false;
     }
 
-    public void tourDeJeu(Joueur joueur) {
-        
-        
-        joueur.attaquer(this); 
-    }
+    
 
     
 }
