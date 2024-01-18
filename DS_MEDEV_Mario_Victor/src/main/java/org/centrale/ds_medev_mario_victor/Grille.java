@@ -9,7 +9,7 @@ package org.centrale.ds_medev_mario_victor;
  * @author murkp
  */
 
-public class GrilleV {
+public class Grille {
     private int largeur;
     private int hauteur;
     private char[][] grilleJoueur1;
@@ -21,7 +21,7 @@ public class GrilleV {
     private Joueur joueur1;
     private Joueur joueur2;
 
-    public GrilleV(int largeur, int hauteur) {
+    public Grille(int largeur, int hauteur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
         this.joueur1 = joueur1;
