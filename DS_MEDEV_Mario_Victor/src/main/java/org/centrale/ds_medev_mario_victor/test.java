@@ -5,7 +5,6 @@ package org.centrale.ds_medev_mario_victor;
  * Classe principale pour lancer le jeu de bataille navale.
  * Cette classe configure et démarre le jeu, y compris la création de la grille,
  * l'initialisation des joueurs et la gestion des tours de jeu.
- * 
  * @author Victor Meirelles
  * @autor Mario Espinoza
  */
