@@ -13,4 +13,5 @@ public class Grille {
     /*
     GRILLE 5*5 PAR JOEUR
     */
+    private int num;
 }
