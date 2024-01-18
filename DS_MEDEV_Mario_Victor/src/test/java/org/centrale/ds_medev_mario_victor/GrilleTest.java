@@ -8,6 +8,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 /**
  *
@@ -64,37 +69,27 @@ public class GrilleTest {
      * Test of affiche method, of class GrilleAdversaire.
      */
     @Test
-    public void testTourDeJeu() {
+    public void testRecevoirAttaque() {
         // Redirigir System.out para capturar la salida
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        // Configurar la entrada simulada para las coordenadas (0, 0)
-        InputStream originalIn = System.in;
-        String input = "0 0\n";
-        ByteArrayInputStream inContent = new ByteArrayInputStream(input.getBytes());
-        System.setIn(inContent);
+        // Crear una instancia de Grille y configurar la situación del juego
+        Grille tuClase = new Grille(3, 3 );  
+        // Configurar las grillas de los jugadores según sea necesario
 
-        // Crear una instancia de TuClase y llamar a tourDeJeu
-        TuClase tuClase = new TuClase();  // Reemplaza "TuClase" con el nombre real de tu clase
-        Joueur joueur = new Joueur("JoueurTest", new Scanner(System.in));
-        tuClase.tourDeJeu(joueur);
+        // Llamar a la función recevoirAttaque con coordenadas válidas (puedes ajustar esto según tu implementación)
+        boolean result = tuClase.recevoirAttaque(new Joueur("Joueur1"), 0, 0);
 
-        // Restaurar la entrada y salida estándar
+        // Restaurar la salida estándar
         System.setOut(System.out);
-        System.setIn(originalIn);
 
         // Verificar la salida esperada
-        String expectedOutput = "JoueurTest, c'est votre tour.\n";
-        expectedOutput += "[Affiche du jeu ici]\n";  // Asegúrate de reemplazar esto con la salida real de affiche(joueur)
-        expectedOutput += "Veuillez choisir les coordonnées pour attaquer (format: x y).\n" +
-                           "x est la colonne (0 à " + (tuClase.getLargeur() - 1) + ") et y est la ligne (0 à " + (tuClase.getHauteur() - 1) + ").\n" +
-                           "Le point le plus en haut à gauche est (0, 0).\n";
+        String expectedOutput = "Touche!\n";  // Ajusta esto según tu lógica de juego
         assertEquals(expectedOutput, outContent.toString());
 
-        // Verificar que la función recevoirAttaque fue llamada con las coordenadas correctas
-        // Aquí necesitarías algún método o lógica adicional para verificar la interacción con la lógica de juego.
-        assertTrue(/* Lógica de verificación para recevoirAttaque */);
+        // Verificar el resultado de la función (puedes ajustar esto según tu lógica de juego)
+        assertTrue(result);
     }
 
     
