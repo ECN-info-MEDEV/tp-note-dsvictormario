@@ -94,7 +94,3 @@ public abstract class Bateau {
 }
 
 
-    // Método abstrato que pode ser implementado pelas classes filhas
-    public abstract void afficherType();
-}
-
