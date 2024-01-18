@@ -24,7 +24,7 @@ public class Joueur {
         this.scanner = new Scanner(System.in);
     }
 
-    public void placerNavire(GrilleV grille, Bateau navire) {
+    public void placerNavire(Grille grille, Bateau navire) {
         System.out.println(nom + ", vous allez placer votre " + navire.getNom() + ".");
 
         boolean positionValide = false;
