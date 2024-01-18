@@ -3,20 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package org.centrale.ds_medev_mario_victor;
-
+import java.util.logging.Logger;
 /**
  *
  * @author murkp
  */
 // PorteAvions.java
 public class PorteAvions extends Bateau {
+    Logger logger = Logger.getLogger(getClass().getName());
     public PorteAvions() {
         super("Porte-Avions", 5); // Nom et taille du Porte-Avions
     }
 
     @Override
     public void afficherType() {
-        System.out.println("Porte-Avions.");
+         logger.info("Porte-Avions.");
     }
 }
 

@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package org.centrale.ds_medev_mario_victor;
-
+import java.util.logging.Logger;
 /**
  *
  * @author murkp
  */
 public class Cuirasse extends Bateau {
+    Logger logger = Logger.getLogger(getClass().getName());
     public Cuirasse() {
         super("Cuirassé", 4); // Nom et taille do Cuirassé
     }
@@ -17,6 +18,6 @@ public class Cuirasse extends Bateau {
 
     @Override
     public void afficherType() {
-        System.out.println("Cuirassé.");
+        logger.info("Cuirassé.");
     }
 }

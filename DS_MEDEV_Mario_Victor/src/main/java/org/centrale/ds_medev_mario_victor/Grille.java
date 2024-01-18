@@ -55,27 +55,32 @@ public class Grille {
         return joueur == joueur1 ? joueur2 : joueur1;
     }
 
-    private void afficherGrilleComplete(char[][] grille) {
-    for (int i = 0; i < hauteur; i++) {
-        for (int j = 0; j < largeur; j++) {
-            System.out.print(grille[i][j] + " ");
+    public String afficherGrilleComplete(char[][] grille) {
+        String output="";
+        for (int i = 0; i < hauteur; i++) {
+            for (int j = 0; j < largeur; j++) {
+                output= output +(grille[i][j] + " ");
+            }
+            output= output + "\n";
         }
-        System.out.println();
-    }
+        return  output;
     }
 
-    private void afficherGrilleAdversaire(char[][] grilleAdversaire) {
+    public String afficherGrilleAdversaire(char[][] grilleAdversaire) {
+        String output="";
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
                 char cellule = grilleAdversaire[i][j];
                 if (cellule == TOUCHE || cellule == MANQUE) {
-                    System.out.print(cellule + " ");
+                    output= output +(cellule + " ");
                 } else {
-                    System.out.print(EAU + " "); 
+                    output= output + (EAU + " "); 
                 }
             }
-            System.out.println();
+            output= output + "\n";
+           
         }
+        return output;
     }
 
 

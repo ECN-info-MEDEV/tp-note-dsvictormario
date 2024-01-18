@@ -4,6 +4,7 @@
  */
 package org.centrale.ds_medev_mario_victor;
 
+
 /**
  *
  * @author murkp
@@ -14,7 +15,7 @@ public abstract class Bateau {
     private int taille;
     private int vie;
 
-    public Bateau(String nom, int taille) {
+    protected Bateau(String nom, int taille) {
         this.nom = nom;
         this.taille = taille;
         this.vie = taille; // A vida inicial é igual à tamanho do navio
