@@ -4,8 +4,13 @@
  */
 package org.centrale.ds_medev_mario_victor;
 
+
 /**
- *
+ * Représente la grille de jeu pour le jeu de bataille navale.
+ * Cette classe gère deux grilles distinctes, une pour chaque joueur,
+ * et fournit des méthodes pour positionner les navires, afficher les grilles,
+ * et gérer les attaques pendant le jeu.
+ * 
  * @author Espinoza Mario
  * @author MEIRELLES Victor
  */
@@ -21,7 +26,13 @@ public class Grille {
     private final static char MANQUE = 'M';
     private Joueur joueur1;
     private Joueur joueur2;
-
+    
+    /**
+     * Constructeur pour initialiser une grille de jeu avec une largeur et une hauteur données.
+     * 
+     * @param largeur La largeur de la grille.
+     * @param hauteur La hauteur de la grille.
+     */
     public Grille(int largeur, int hauteur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
@@ -30,6 +41,10 @@ public class Grille {
         initialiserGrille();
     }
 
+    /**
+     * Initialise les deux grilles de jeu pour les joueurs.
+     * Chaque grille est remplie initialement avec des caractères représentant de l'eau.
+     */
     private void initialiserGrille() {
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
@@ -39,6 +54,13 @@ public class Grille {
         }
     }
 
+    /**
+     * Affiche la grille du joueur actuel et une vue partielle de la grille de l'adversaire.
+     * La grille du joueur montre la position des navires, tandis que celle de l'adversaire
+     * ne montre que les résultats des attaques.
+     * 
+     * @param joueurActuel Le joueur pour lequel les grilles sont affichées.
+     */
     public void affiche(Joueur joueurActuel) {
         if(joueurActuel == this.joueur1){
             System.out.println(joueurActuel.getNom() + " - Votre Grille:");
@@ -49,6 +71,12 @@ public class Grille {
         
     }
 
+    /**
+     * Renvoie le joueur adverse.
+     * 
+     * @param joueur Le joueur pour lequel l'adversaire doit être déterminé.
+     * @return Le joueur adverse.
+     */
     private Joueur getAdversaire(Joueur joueur) {
         return joueur == joueur1 ? joueur2 : joueur1;
     }
@@ -77,7 +105,17 @@ public class Grille {
     }
 
 
-
+    /**
+     * Méthode pour positionner un navire sur la grille d'un joueur.
+     * Demande au joueur s'il souhaite placer le navire horizontalement ou verticalement,
+     * puis positionne le navire en conséquence si possible.
+     * 
+     * @param joueur Le joueur qui positionne le navire.
+     * @param navire Le navire à positionner.
+     * @param x La coordonnée x de départ pour le positionnement du navire.
+     * @param y La coordonnée y de départ pour le positionnement du navire.
+     * @return Vrai si le navire a été positionné avec succès, faux sinon.
+     */
     public boolean positionnerNavire(Joueur joueur, Bateau navire, int x, int y) {
         System.out.println(joueur.getNom() + ", voulez-vous placer le navire horizontalement ou verticalement? (H/V)");
         String choix = joueur.getScanner().nextLine().toUpperCase();
@@ -105,7 +143,15 @@ public class Grille {
         }
 }
 
-
+    /**
+     * Positionne un navire de manière horizontale sur la grille d'un joueur.
+     * 
+     * @param joueur Le joueur qui positionne le navire.
+     * @param navire Le navire à positionner.
+     * @param x La coordonnée x de départ pour le positionnement du navire.
+     * @param y La coordonnée y de départ pour le positionnement du navire.
+     * @return Vrai si le navire a été positionné avec succès, faux sinon.
+     */
     private boolean positionnerHorizontal(Joueur joueur, Bateau navire, int x, int y) {
         if(joueur==this.joueur1){
             if (x + navire.getTaille() > largeur) {
@@ -152,7 +198,15 @@ public class Grille {
         
     }
 
-
+    /**
+     * Positionne un navire de manière verticale sur la grille d'un joueur.
+     * 
+     * @param joueur Le joueur qui positionne le navire.
+     * @param navire Le navire à positionner.
+     * @param x La coordonnée x de départ pour le positionnement du navire.
+     * @param y La coordonnée y de départ pour le positionnement du navire.
+     * @return Vrai si le navire a été positionné avec succès, faux sinon.
+     */
     private boolean positionnerVertical(Joueur joueur, Bateau navire, int x, int y) {
         if(joueur == this.joueur1){
             if (y + navire.getTaille() > hauteur) {
@@ -199,7 +253,15 @@ public class Grille {
     }
 
 
-
+    /**
+     * Gère une tentative d'attaque sur la grille d'un joueur.
+     * Vérifie si l'attaque touche un navire, manque, ou si le point a déjà été attaqué.
+     * 
+     * @param joueur Le joueur attaqué.
+     * @param x La coordonnée x de l'attaque.
+     * @param y La coordonnée y de l'attaque.
+     * @return Vrai si l'attaque est valide (touche ou manque), faux si le point a déjà été attaqué ou est hors de la grille.
+     */
     public boolean recevoirAttaque(Joueur joueur, int x, int y) {
         if(joueur == this.joueur1){
             if (x >= 0 && x < largeur && y >= 0 && y < hauteur) {
@@ -250,7 +312,12 @@ public class Grille {
         
 }
 
-
+    /**
+     * Gère le tour d'un joueur dans le jeu.
+     * Permet au joueur de choisir les coordonnées pour attaquer et traite l'attaque.
+     * 
+     * @param joueur Le joueur qui a le tour.
+     */
     public void tourDeJeu(Joueur joueur) {
         System.out.println(joueur.getNom() + ", c'est votre tour.");
         this.affiche(joueur);

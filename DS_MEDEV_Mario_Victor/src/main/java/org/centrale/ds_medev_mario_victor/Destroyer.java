@@ -1,21 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
 package org.centrale.ds_medev_mario_victor;
+
 import java.util.logging.Logger;
+
 /**
- *
- * @author murkp
+ * Représente un destroyer dans le jeu de bataille navale.
+ * Le destroyer est un type de navire plus petit, caractérisé par sa taille moyenne.
+ * Il hérite de la classe {@link Bateau} et a une taille spécifique.
+ * Cette classe définit les caractéristiques et les comportements d'un destroyer.
+ * 
+ * @author Victor Meirelles
+ * @autor Mario Espinoza
  */
 public class Destroyer extends Bateau {
     Logger logger = Logger.getLogger(getClass().getName());
+
+    /**
+     * Constructeur pour Destroyer.
+     * Initialise un destroyer avec un nom spécifique ("Destroyer") et une taille définie (3).
+     */
     public Destroyer() {
-        super("Destroyer", 3); // Nom et taille do Destroyer
+        super("Destroyer", 3); // Nom et taille du Destroyer
     }
 
+    /**
+     * Affiche le type de navire.
+     * Cette méthode surcharge {@code afficherType} de la classe parente {@link Bateau},
+     * et utilise un logger pour enregistrer le type de navire.
+     */
     @Override
     public void afficherType() {
-        logger.info("Destroyer.");
+        logger.info("Je suis un Destroyer.");
     }
 }
+
