@@ -13,5 +13,6 @@ public class Grille {
     /*
     GRILLE 5*5 PAR JOEUR
     */
-    private int num;
+     private int dimension;
+     private Joeur player;
 }
