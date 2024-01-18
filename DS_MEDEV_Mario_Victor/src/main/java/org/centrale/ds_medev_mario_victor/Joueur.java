@@ -23,32 +23,50 @@ public class Joueur {
 
     public Joueur(String nom) {
         this.nom = nom;
-        this.grille = new Grille(5, 5); // Supondo que a classe Grille tem um construtor com largura e altura
-        this.navires = new Bateau[1]; // Cada jogador tem um navio
+        this.grille = new Grille(5, 5); 
+        this.navires = new Bateau[3]; 
         this.scanner = new Scanner(System.in);
     }
 
-    public void placerNavires() {
-        System.out.println(nom + ", vous allez placer votre navire.");
-
-        // Aqui você pode expandir para permitir diferentes tipos de navios
-        navires[0] = new Destroyer(); // Exemplo com um Destroyer
+    public void placerNavire(Bateau navire) {
+        System.out.println(nom + ", vous allez placer votre " + navire.getNom() + ".");
 
         boolean positionValide = false;
         while (!positionValide) {
             try {
-                System.out.println("Entrez les coordonnées pour placer votre Destroyer (format: x y): ");
+                System.out.println("Entrez les coordonnées pour placer votre " + navire.getNom() + " (format: x y): ");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
 
-                positionValide = grille.positionnerNavire(navires[0], x, y);
+                positionValide = grille.positionnerNavire(navire, x, y);
 
                 if (!positionValide) {
                     System.out.println("Position invalide, essayez à nouveau.");
                 }
             } catch (Exception e) {
                 System.out.println("Entrée invalide. Veuillez entrer des numéros.");
-                scanner.next(); // Pour éviter une boucle infinie en cas d'erreur de saisie
+                scanner.next(); // To avoid infinite loop in case of input error
+            }
+        }
+    }
+
+    private Bateau choisirNavire() {
+        System.out.println("Choisissez un navire à placer (1: Destroyer, 2: Cuirassé, 3: Porte-Avions):");
+        int choix = scanner.nextInt();
+
+        switch (choix) {
+            case 1 -> {
+                return new Destroyer();
+            }
+            case 2 -> {
+                return new Cuirasse();
+            }
+            case 3 -> {
+                return new PorteAvions();
+            }
+            default -> {
+                System.out.println("Choix invalide. Par défaut, un Destroyer sera placé.");
+                return new Destroyer();
             }
         }
     }
@@ -86,8 +104,6 @@ public class Joueur {
     public String getNom() {
         return nom;
     }
-
-    // Ajoutez des getters ou des setters supplémentaires si nécessaire
 }
 
 
