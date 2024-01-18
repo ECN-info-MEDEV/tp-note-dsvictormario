@@ -6,103 +6,278 @@ package org.centrale.ds_medev_mario_victor;
 
 /**
  *
- * @author murkp
+ * @author Espinoza Mario
+ * @author MEIRELLES Victor
  */
-public class Grille{
+
+public class Grille {
     private int largeur;
     private int hauteur;
-    private char[][] grille;
+    private char[][] grilleJoueur1;
+    private char[][] grilleJoueur2;
     private final char EAU = '~';
     private final char NAVIRE = 'N';
     private final char TOUCHE = 'T';
     private final char MANQUE = 'M';
+    private Joueur joueur1;
+    private Joueur joueur2;
 
     public Grille(int largeur, int hauteur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
-        grille = new char[hauteur][largeur];
+        this.joueur1 = joueur1;
+        this.joueur2 = joueur2;
+        grilleJoueur1 = new char[hauteur][largeur];
+        grilleJoueur2 = new char[hauteur][largeur];
         initialiserGrille();
     }
 
     private void initialiserGrille() {
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
-                grille[i][j] = EAU;
+                grilleJoueur1[i][j] = EAU;
+                grilleJoueur2[i][j] = EAU;
             }
         }
     }
 
-    public void affiche() {
+    public void affiche(Joueur joueurActuel) {
+        if(joueurActuel == this.joueur1){
+            System.out.println(joueurActuel.getNom() + " - Votre Grille:");
+        afficherGrilleComplete(grilleJoueur1);
+        System.out.println(getAdversaire(joueurActuel).getNom() + " - Grille de l'Adversaire:");
+        afficherGrilleAdversaire(grilleJoueur2);
+        }
+        
+    }
+
+    private Joueur getAdversaire(Joueur joueur) {
+        return joueur == joueur1 ? joueur2 : joueur1;
+    }
+
+    private void afficherGrilleComplete(char[][] grille) {
+    for (int i = 0; i < hauteur; i++) {
+        for (int j = 0; j < largeur; j++) {
+            System.out.print(grille[i][j] + " ");
+        }
+        System.out.println();
+    }
+    }
+
+    private void afficherGrilleAdversaire(char[][] grilleAdversaire) {
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
-                System.out.print(grille[i][j] + " ");
+                char cellule = grilleAdversaire[i][j];
+                if (cellule == TOUCHE || cellule == MANQUE) {
+                    System.out.print(cellule + " ");
+                } else {
+                    System.out.print(EAU + " "); 
+                }
             }
             System.out.println();
         }
     }
 
-    public boolean positionnerNavire(Bateau navire, int x, int y, boolean horizontal) {
-        if (horizontal) {
-            return positionnerHorizontal(navire, x, y);
-        } else {
-            return positionnerVertical(navire, x, y);
-        }
-    }
 
-    private boolean positionnerHorizontal(Bateau navire, int x, int y) {
-        if (x + navire.getTaille() > largeur) {
+
+    public boolean positionnerNavire(Joueur joueur, Bateau navire, int x, int y) {
+        System.out.println(joueur.getNom() + ", voulez-vous placer le navire horizontalement ou verticalement? (H/V)");
+        String choix = joueur.getScanner().nextLine().toUpperCase();
+
+        boolean peutPlacerHorizontal = (x + navire.getTaille() <= largeur);
+        boolean peutPlacerVertical = (y + navire.getTaille() <= hauteur);
+
+        if (choix.equals("H")) {
+            if (peutPlacerHorizontal) {
+                return positionnerHorizontal(joueur, navire, x, y);
+            } else {
+                System.out.println("Placement horizontal impossible. Essayez une autre position ou orientation.");
+                return false;
+            }
+        } else if (choix.equals("V")) {
+            if (peutPlacerVertical) {
+                return positionnerVertical(joueur, navire, x, y);
+            } else {
+                System.out.println("Placement vertical impossible. Essayez une autre position ou orientation.");
+                return false;
+            }
+        } else {
+            System.out.println("Choix invalide. Veuillez entrer 'H' pour horizontal ou 'V' pour vertical.");
+            return positionnerNavire(joueur, navire, x, y); 
+        }
+}
+
+
+    private boolean positionnerHorizontal(Joueur joueur, Bateau navire, int x, int y) {
+        if(joueur==this.joueur1){
+            if (x + navire.getTaille() > largeur) {
             System.out.println("Vous ne pouvez pas placer le navire ici, il dépasse de la grille horizontalement.");
             return false; 
-        }
-        for (int i = x; i < x + navire.getTaille(); i++) {
-            if (grille[y][i] != EAU) {
-                System.out.println("Vous ne pouvez pas placer le navire ici, la position est déjà occupée.");
-                return false; 
             }
+
+            for (int i = x; i < x + navire.getTaille(); i++) {
+                if (grilleJoueur1[y][i] != EAU) {
+                    System.out.println("Vous ne pouvez pas placer le navire ici, la position est déjà occupée.");
+                    return false; 
+                }
+            }
+
+            for (int i = x; i < x + navire.getTaille(); i++) {
+                grilleJoueur1[y][i] = NAVIRE;
+            }
+
+            System.out.println("Navire placé horizontalement avec succès.");
+            return true;
+            }
+        else{
+            if (x + navire.getTaille() > largeur) {
+            System.out.println("Vous ne pouvez pas placer le navire ici, il dépasse de la grille horizontalement.");
+            return false; 
+            }
+
+            for (int i = x; i < x + navire.getTaille(); i++) {
+                if (grilleJoueur2[y][i] != EAU) {
+                    System.out.println("Vous ne pouvez pas placer le navire ici, la position est déjà occupée.");
+                    return false; 
+                }
+            }
+
+            for (int i = x; i < x + navire.getTaille(); i++) {
+                grilleJoueur2[y][i] = NAVIRE;
+            }
+
+            System.out.println("Navire placé horizontalement avec succès.");
+            return true;
         }
-        for (int i = x; i < x + navire.getTaille(); i++) {
-            grille[y][i] = NAVIRE;
-        }
-        System.out.println("Navire placé horizontalement avec succès.");
-        return true;
+        
+
+        
     }
 
-    private boolean positionnerVertical(Bateau navire, int x, int y) {
-        if (y + navire.getTaille() > hauteur) {
+
+    private boolean positionnerVertical(Joueur joueur, Bateau navire, int x, int y) {
+        if(joueur == this.joueur1){
+            if (y + navire.getTaille() > hauteur) {
             System.out.println("Vous ne pouvez pas placer le navire ici, il dépasse de la grille verticalement.");
             return false; 
-        }
-        for (int j = y; j < y + navire.getTaille(); j++) {
-            if (grille[j][x] != EAU) {
-                System.out.println("Vous ne pouvez pas placer le navire ici, la position est déjà occupée.");
-                return false; 
             }
+
+            for (int j = y; j < y + navire.getTaille(); j++) {
+                if (grilleJoueur1[j][x] != EAU) {
+                    System.out.println("Vous ne pouvez pas placer le navire ici, la position est déjà occupée.");
+                    return false; 
+                }
+            }
+
+            for (int j = y; j < y + navire.getTaille(); j++) {
+                grilleJoueur1[j][x] = NAVIRE;
+            }
+
+            System.out.println("Navire placé verticalement avec succès.");
+            return true;
         }
-        for (int j = y; j < y + navire.getTaille(); j++) {
-            grille[j][x] = NAVIRE;
+        else{
+            if (y + navire.getTaille() > hauteur) {
+            System.out.println("Vous ne pouvez pas placer le navire ici, il dépasse de la grille verticalement.");
+            return false; 
+            }
+
+            for (int j = y; j < y + navire.getTaille(); j++) {
+                if (grilleJoueur2[j][x] != EAU) {
+                    System.out.println("Vous ne pouvez pas placer le navire ici, la position est déjà occupée.");
+                    return false; 
+                }
+            }
+
+            for (int j = y; j < y + navire.getTaille(); j++) {
+                grilleJoueur2[j][x] = NAVIRE;
+            }
+
+            System.out.println("Navire placé verticalement avec succès.");
+            return true;
         }
-        System.out.println("Navire placé verticalement avec succès.");
-        return true;
+
+        
     }
 
 
-    public boolean recevoirAttaque(int x, int y) {
-        if (x >= 0 && x < largeur && y >= 0 && y < hauteur) {
-            if (grille[y][x] == NAVIRE) {
-                grille[y][x] = TOUCHE;
-                System.out.println("Touche!");
-                return true;
-            } else if (grille[y][x] == EAU) {
-                grille[y][x] = MANQUE;
-                System.out.println("Manque!");
-                return true;
+
+    public boolean recevoirAttaque(Joueur joueur, int x, int y) {
+        if(joueur == this.joueur1){
+            if (x >= 0 && x < largeur && y >= 0 && y < hauteur) {
+                switch (grilleJoueur1[y][x]) {
+                    case NAVIRE -> {
+                        grilleJoueur1[y][x] = TOUCHE;
+                        System.out.println("Touche!");
+                        return true;
+                    }
+                    case EAU -> {
+                        grilleJoueur1[y][x] = MANQUE;
+                        System.out.println("Manque!");
+                        return true;
+                    }
+                    default -> { 
+                        System.out.println("Vous avez déjà attaqué ce point.");
+                        return false;
+                    }
+                }
+            } else {
+                System.out.println("Attaque en dehors de la grille!");
+                return false;
             }
         }
-        return false;
+        else{
+            if (x >= 0 && x < largeur && y >= 0 && y < hauteur) {
+                switch (grilleJoueur2[y][x]) {
+                    case NAVIRE -> {
+                        grilleJoueur2[y][x] = TOUCHE;
+                        System.out.println("Touche!");
+                        return true;
+                    }
+                    case EAU -> {
+                        grilleJoueur2[y][x] = MANQUE;
+                        System.out.println("Manque!");
+                        return true;
+                    }
+                    default -> { 
+                        System.out.println("Vous avez déjà attaqué ce point.");
+                        return false;
+                    }
+                }
+            } else {
+                System.out.println("Attaque en dehors de la grille!");
+                return false;
+            }
+        }
+        
+}
+
+
+    public void tourDeJeu(Joueur joueur) {
+        System.out.println(joueur.getNom() + ", c'est votre tour.");
+        this.affiche(joueur);
+
+        Joueur adversaire = getAdversaire(joueur);
+        boolean attaqueValide = false;
+        while (!attaqueValide) {
+            try {
+                System.out.println("Veuillez choisir les coordonnées pour attaquer (format: x y).\n" +
+                                   "x est la colonne (0 à " + (largeur - 1) + ") et y est la ligne (0 à " + (hauteur - 1) + ").\n" +
+                                   "Le point le plus en haut à gauche est (0, 0).");
+                int x = joueur.getScanner().nextInt();
+                int y = joueur.getScanner().nextInt();
+
+                if (x >= 0 && x < largeur && y >= 0 && y < hauteur) {
+                    attaqueValide = recevoirAttaque(adversaire, x, y); // Atacar o adversário
+                } else {
+                    System.out.println("Coordonnées hors de la grille. Veuillez réessayer.");
+                }
+            } catch (Exception e) {
+                System.out.println("Entrée invalide. Veuillez entrer des numéros valides.");
+                joueur.getScanner().next(); // Para evitar loop infinito em caso de erro de entrada
+            }
+        }
     }
 
-    
-
-    
 }
 
