@@ -1,3 +1,4 @@
+
 package org.centrale.ds_medev_mario_victor;
 
 import java.util.logging.Logger;
@@ -17,9 +18,11 @@ public class PorteAvions extends Bateau {
      * Constructeur pour PorteAvions.
      * Initialise un porte-avions avec un nom spécifique et une taille définie.
      */
+
     public PorteAvions() {
         super("Porte-Avions", 5); // Nom et taille du Porte-Avions
     }
+
 
     /**
      * Affiche le type de navire.
@@ -30,4 +33,5 @@ public class PorteAvions extends Bateau {
         logger.info("Je suis un Porte-Avions.");
     }
 }
+
 

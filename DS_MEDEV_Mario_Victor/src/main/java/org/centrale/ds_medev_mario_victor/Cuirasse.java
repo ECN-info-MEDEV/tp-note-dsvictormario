@@ -1,3 +1,4 @@
+
 package org.centrale.ds_medev_mario_victor;
 
 import java.util.logging.Logger;
@@ -32,4 +33,5 @@ public class Cuirasse extends Bateau {
         logger.info("Je suis un Cuirassé.");
     }
 }
+
 
