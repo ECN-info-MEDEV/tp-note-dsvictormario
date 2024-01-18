@@ -15,18 +15,16 @@ public class Grille {
     private int hauteur;
     private char[][] grilleJoueur1;
     private char[][] grilleJoueur2;
-    private final char EAU = '~';
-    private final char NAVIRE = 'N';
-    private final char TOUCHE = 'T';
-    private final char MANQUE = 'M';
+    private final static char EAU = '~';
+    private final static char NAVIRE = 'N';
+    private final static char TOUCHE = 'T';
+    private final static char MANQUE = 'M';
     private Joueur joueur1;
     private Joueur joueur2;
 
     public Grille(int largeur, int hauteur) {
         this.largeur = largeur;
         this.hauteur = hauteur;
-        this.joueur1 = joueur1;
-        this.joueur2 = joueur2;
         grilleJoueur1 = new char[hauteur][largeur];
         grilleJoueur2 = new char[hauteur][largeur];
         initialiserGrille();
